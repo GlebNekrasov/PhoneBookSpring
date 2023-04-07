@@ -9,6 +9,7 @@ import ru.academits.nekrasovgleb.service.ContactService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -32,10 +33,14 @@ public class PhoneBookController {
     @RequestMapping(value = "addContact", method = RequestMethod.POST)
     @ResponseBody
     public ContactValidation addContact(@RequestBody Contact contact) {
+        logger.info("called method addContact using params: firstName = " + contact.getFirstName() + ", lastName = " +
+                contact.getLastName() + ", phone = " + contact.getPhone());
         return contactService.addContact(contact);
     }
 
     @RequestMapping(value = "deleteContacts", method = RequestMethod.POST)
     @ResponseBody
-    public DeleteValidation deleteContacts(@RequestBody int[] idsToDelete) { return contactService.deleteContacts(idsToDelete); }
+    public DeleteValidation deleteContacts(@RequestBody int[] idsToDelete) {
+        logger.info("called method deleteContacts using params: idsToDelete = " + Arrays.toString(idsToDelete));
+        return contactService.deleteContacts(idsToDelete); }
 }
